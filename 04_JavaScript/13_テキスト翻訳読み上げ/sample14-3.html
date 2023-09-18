@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>sample14-3</title>
+		<style>
+
+		</style>
+	<head>
+	<body>
+		<h1>WebAudio API</h1>
+		<p>音量：<input id="vol" type="range" min="0" max="1" value="0.5" step="0.1"></p>
+
+		<script>
+			//①-1. 初期化
+			const hz = [523.251, 587.330, 659.255, 698.456, 783.991, 880, 987.767, 1046.502];
+			const code = [49,50,51,52,53,54,55,56];    	//PCのキーコード
+			const ac = new AudioContext();    			//音の元を作る（ボリューム）
+			const vcg = ac.createGain();    			//ボリュームを作る
+			const vco = new Array();		//vco[0]からvco[7]までのそれぞれに、キーに対応する音階や音色のデータを格納予定
+
+			//①-2. 音階を作る
+			for(let i=0; i<hz.length; i++){
+				ini(i);
+				// 一旦その音を初期化「ini()」する。音量や音階は後ほど設定
+				vco[i].type="sine";	//音色 sine(正弦波)」を指定
+			}
+
+			//①-3. 出力につなぐ
+			vcg.connect(ac.destination);
+
+			//② キーをおした時
+			let i; window.addEventListener("keydown",function(e){
+				i = code.indexOf(e.keyCode);	
+				//e.keyCode押したキーコード.「code」を逆引きして、何番目かを特定
+				vcg.gain.value = document.getElementById("vol").value; //音量
+				//音量
+				vco[i].type= "sine";
+				vco[i].start();
+
+			});
+
+
+			//③キーを離した時
+			window.addEventListener("keyup",function(e){
+				i = code.indexOf(e.keyCode);
+				vco.stop();
+				ini(i);
+				//停止するたびにその音を初期化「ini()」する仕様
+			});
+
+
+			function ini(i){
+				vco[i]=ac.createOscillator();	//音源を作る
+				vco[i]=connect(vcg);			//音源をボリュームに繋ぐ
+				vco[i].frequency.value=hz[i];	//周波数を設定
+			};
+		</script>
+	</body>
+</html>

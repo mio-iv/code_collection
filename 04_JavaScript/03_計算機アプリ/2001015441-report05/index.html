@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>計算機アプリ</title>
+        <style>
+            /*CSSのエリア*/
+            #input1{
+                width: 90px;
+                height: 30px;
+                border-width: medium;
+                border-color: brown;
+                background-color: blanchedalmond;
+            }
+            #input2{
+                width: 90px;
+                height: 30px;
+                border-width: medium;
+                border-color: brown;
+                background-color: blanchedalmond;
+            }            
+            #box1{
+                width: 200px;
+                padding: 3px;
+                font-size: 16px;
+                border: 1px solid gray;
+                text-align: right;
+                border-width: medium;
+                border-color:rgb(4, 4, 56);
+                background-color: blanchedalmond;
+            }
+            #button01{
+                width: 90px;
+                height: 30px;
+                font-size: 15px;
+                border-radius: 5px;
+                border-width: medium;
+                border-color: rgb(118, 236, 7);
+                background-color:beige;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>計算機</h2>
+        <p>入力された数字の計算をします。</p>
+        <!-- コンテンツのエリア -->
+        <p>
+            <input type="text" id="input1">
+            <input type="text" id="input2">
+        </p>
+        <p>
+            <button onclick="btn('足し算');" id="button01">足し算</button>
+            <button onclick="btn('引き算');" id="button01">引き算</button>
+        </p>
+        <p>
+            <button onclick="btn('掛け算');" id="button01">掛け算</button>
+            <button onclick="btn('割り算');" id="button01">割り算</button>
+        </p>
+
+        <p id="box1">結果</p>
+
+        <h5>[工夫点]<h5>
+        <p>枠のサイズ、色、角の曲線、フォント等のデザインをしています。</p>
+        <p>どのボタンも、関数は一つに集約していますが、引数で計算方法を変えています。</p>
+        <p>また、２引数の値をチェックする機能を別関数として切り出しています。</p>
+        <p>チェック機能は、</p>
+        <p>①どちらかが空欄のとき : 「未入力箇所があります。」と黒文字で出力。</p>
+        <p>②どちらかが数値ではない場合 : 「数値を入力してください。」と赤文字で出力。</p>
+        <p>③割り算かつ第2引数が0の場合 : 「0で割り算はできません。」と赤文字で出力。</p>
+        
+        
+        <script>
+            //JavaScriptのエリア
+            function btn(method){
+                //足し算
+                const box1 = document.getElementById("box1");
+                r = check(box1, method)
+                if(r == true){
+                    let result = ''
+                    switch(method){
+                        case '足し算':
+                            result = parseFloat(input1.value) + parseFloat(input2.value);
+                            break;
+                        case '引き算':
+                            result = parseFloat(input1.value) - parseFloat(input2.value);
+                            break;
+                        case '掛け算':
+                            result = parseFloat(input1.value) * parseFloat(input2.value);
+                            break;
+                        case '割り算':
+                            result = parseFloat(input1.value) / parseFloat(input2.value);
+                            break;
+                    }
+                    box1.innerHTML = result;
+                    box1.style.color = "brack";                    
+                }
+            }
+
+            function check(box1, method){
+                const input1 = document.getElementById("input1");
+                const input2 = document.getElementById("input2");
+
+                if ((input1.value == '') || (input2.value == '')){
+                    box1.innerHTML = '未入力箇所があります。';
+                    box1.style.color = "brack";
+                    return false;
+                }else if(isNaN(parseFloat(input1.value)) || isNaN(parseFloat(input2.value))){
+                    box1.innerHTML = '数値を入力してください。';
+                    box1.style.color = "red";
+                    return false;
+                }else if((method == '割り算') && (parseFloat(input2.value) == 0)){
+                    box1.innerHTML = '0で割り算はできません。';
+                    box1.style.color = "red";
+                    return false;                    
+                }else{
+                    return true;
+                }
+            }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>サンプル3-2</title>
+    <style>
+      /*CSSのエリア*/
+    </style>
+  </head>
+  <body>
+    <!-- コンテンツのエリア -->
+    <p id="box1">こんにちは！</p>
+    <p id="result">計算結果</p>
+    <script>
+      //JavaScriptのエリア
+        const box1 = document.getElementById("box1");
+        box1.innerHTML = "おはよう！";
+        
+        let a = 1;
+        let b = 2;
+        let c = a+b;
+        const result = document.getElementById("result");
+        result.innerHTML = c;
+
+    </script>
+  </body>
+</html>

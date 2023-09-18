@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>サンプル9-3</title>
+		<style>
+		</style>
+	</head>
+	<body>
+		<p><canvas id="canvas1" width="300" height="300"></p>
+		<script>
+			const canvas1 = document.getElementById("canvas1");
+			const ctx1 = canvas1.getContext("2d");
+			let x,y;
+			let drowOK = false;
+			canvas1.addEventListener(
+				"mousemove",function(e){
+					//eは仮引数 (名無し) 
+					//canvas要素のイベント実行、位置情報などは第一仮引数に収められる
+					// function(){…処理…}は、「無名関数」と言い、
+					// w関数名をつけることなく直ちにプログラムを実行したい時に用います。
+					const rect = e.target.getBoundingClientRect();
+					//rect : canvas要素の境界面の情報」
+					x = e.clientX - rect.left;
+					y = e.clientY - rect.top;		
+					ctx1.fillStyle="blue";
+					if(drowOK){
+						ctx1.fillRect(x-2,y-2,4,4);
+					}
+				}
+			);
+
+			canvas1.addEventListener(
+				"mousedown", function(e){
+					drowOK = true;
+				}
+			);
+			canvas1.addEventListener(
+				"mouseup", function(e){
+					drowOK = false;
+				}
+			);			
+		
+		</script>
+	</body>
+</html>

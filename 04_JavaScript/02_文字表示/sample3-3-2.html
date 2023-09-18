@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>サンプル3-2</title>
+    <style>
+      /*CSSのエリア*/
+    </style>
+  </head>
+  <body>
+    <!-- コンテンツのエリア -->
+    <p>おはよう！</p>
+    <p>こんにちは！</p>
+    <p>こんばんは！</p>
+
+    <h6 class="css1">元気！</h6>
+    <h6 class="css1">パワー！</h6>
+    <script>
+      //JavaScriptのエリア
+        const tags = document.getElementsByTagName("p");
+        tags[0].innerHTML = "good morning";
+        tags[1].innerHTML = "good afternoon";
+        tags[2].innerHTML = "good evening";
+
+        const classes = document.getElementsByClassName("css1");
+        classes[0].innerHTML = "class-0";
+        classes[1].innerHTML = "class-1";
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>サンプル6-2</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <p id="date1"></p>
+ 
+    <script>
+        const date1 = document.getElementById("date1");
+        const now = new Date();
+        // date1.innerHTML = now;
+        let y = now.getFullYear();
+        let m = now.getMonth()+1;
+        let d = now.getDate();
+        let h = now.getHours();
+        let i = now.getMinutes();
+        let s = now.getSeconds();
+        let ms = now.getMilliseconds();
+        date1.innerHTML = y+"年"+m+"月"+d+"日"+h+"時"+i+"分"+(s+ms/1000)+"秒";
+
+        let t = now.getTime();
+        date1.innerHTML = "1970年1月1日0時0分0秒から" + t/1000 + "秒経過しています。";
+
+    </script>
+  </body>
+</html>

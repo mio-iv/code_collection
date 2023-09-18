@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>サンプル7-4</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <p id="n">占いの結果</p>
+    <button onclick="btn01();";>おみくじを振る</button>
+         
+    <script>      
+      const n = document.getElementById("n");
+      let msg;
+
+      function btn01(){
+        let r = Math.floor(Math.random()*3);
+        if(r===0){msg='大吉'};
+        if(r===1){msg='中吉'};
+        if(r===2){msg='小吉'};
+        n.innerHTML = msg+'です！';
+      }
+ 
+    </script>
+  </body>
+</html>

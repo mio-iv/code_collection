@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>sample14-4</title>
+		<style>
+			*{font-size:16px;margin:0.5em;padding:0.3px;}
+		</style>
+	</head>
+	<body>
+		<h1>テキスト読み上げ</h1>
+		<ol>
+			<li>テキスト入力<br>
+			<textarea id="textarea1">Hello World.</textarea>
+		</li>
+		<li>
+			<button onclick="voiceList();">音声データ選択</button>
+			<select id="voice"></select>
+		</li>
+		<li>言語：
+			<select id="lang">
+				<option value="ja-JP">日本語</option>
+				<option value="en-US" selected>英語</option>
+			</select>
+		</li>
+		<li><button onclick="speech1();">読み上げます</button></li>
+
+		<script>
+
+			//①要素の取得
+			const textarea1 = document.getElementById("textarea1");
+			const voice = document.getElementById("voice");
+			const lang = document.getElementById("lang");
+
+			//②バグのため
+			let voices = speechSynthesis.getVoices();
+
+			//③読み上げ可能な音声リストを取得
+			function voiceList(){
+				let voices = speechSynthesis.getVoices();
+				let voiceStr;	//音声名などのテキストを保存する変数
+				for(let i=0; i<voices.length; i++){
+					if(voices[i]){
+						voiceStr = "<option voice="+i+">"+voices[i].name+"</option>";
+					}	//option要素で、プルダウン選択が可能に。
+				}
+				voice.innerHTML = voiceStr;
+			}
+
+			//④再生
+			function speech1(){
+				let textarea1Value = textarea1.value;
+				let voiceNo = parseInt(voice.value);
+				voices = speechSynthesis.getVoices();	//「.getVoices()」メソッドで音声リストを取得
+				const content = new SpeechSynthesisUtterance(textarea1Value);
+					//読み上げ音声のオブジェクトを生成
+				content.lang = lang.value;		//言語設定
+				content.voice = voices[voiceNo];//音声設定
+				speechSynthesis.speak(content);
+			}
+		</script>
+	</body>
+</html>

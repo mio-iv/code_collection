@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>sample10-4-1</title>
+		<style>
+			#canvas1{border:1px solid gray;}
+			p{text-align:center;}
+		</style>
+	</head>
+	<body>
+		<p><canvas id="canvas1" width="200" height="200"></canvas></p>
+		<script>
+			const canvas1=document.getElementById("canvas1");
+			const ctx1=canvas1.getContext("2d");
+
+			ctx1.beginPath();	//パス開始
+			ctx1.moveTo(50,50);	//開始位置指定
+			deg1=270;
+			// ctx1.arc(50,50,40,0,1.5*Math.PI,true);	//円弧描画
+			ctx1.arc(50,50,40,0,deg1/180*Math.PI,true);	//度表記
+			ctx1.fillStyle="yellow";
+			ctx1.fill();
+			
+
+		</script>
+	</body>
+</html>

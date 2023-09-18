@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>sample13-2</title>
+		<meta name="viewport" content="width=322">
+		<!-- content="width=322">	は、表示領域の幅を設定し、文字が小さくなりすぎないようにする。 -->
+		<link rel="stylesheet" href="sample13-2.css">
+		<!-- Google Map API script要素を記述。APIキーを設定-->
+		<script src="https://maps.google.com/maps/api/js?key=AIzaSyByeAvrNnIuzNXzCMDrSYyjjMVP2xoDagA"></script>
+
+	</head>
+	<body>
+		<div id="wrap">
+			<h1>Geolocation</h1>
+			<!-- 情報表示部分 -->
+			<div class="flex">
+				<div id="msg">メッセージ</div>
+				<button onclick="getMap();">取得</button>
+			</div>
+			<ul>
+				<li id="chizu">地図</li>
+				<li id="ido">緯度</li>
+				<li id="keido">経度</li>
+				<li id="koudo">高度</li>
+			</ul>
+		</div>
+		<script src="sample13-2.js" charset="utf-8"></script>
+	</body>
+</html>

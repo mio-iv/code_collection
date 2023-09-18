@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>サンプル9-2</title>
+		<style>
+			#canvas1{border: 1px solid gray;}
+		</style>
+	</head>
+	<body>
+		<p><canvas id="canvas1" width="300" height="300"></canvas></p>
+		<script>
+			const canvas1 = document.getElementById("canvas1");
+			const ctx1 = canvas1.getContext("2d");	//描画のオブジェクト
+			ctx1.fillStyle="blue";	//描画の塗りつぶし(fill)の色(Style)を指定
+			ctx1.fillRect(50,100,200,100);	//矩形の左上を開始点
+			// 座標が最初の2つの値(50,100)、3つめの値(200)は横幅、最後の値(100)は高さ
+
+		</script>
+	</body>
+</html>
