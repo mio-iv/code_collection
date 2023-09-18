@@ -1,16 +1,23 @@
 .env
 .DS_Store
 
-01_Python/03_E検定プログラム/02_Pandas/titanic_train.csv
-01_Python/03_E検定プログラム/03_matplotlib/tips
-01_Python/03_E検定プログラム/04_seaborn/house
-01_Python/03_E検定プログラム/04_seaborn/tips
-01_Python/03_E検定プログラム/05_前処理/titanic
-01_Python/03_E検定プログラム/06_機械学習/titanic
+01_Python/03_E_TEST/02_Pandas/titanic_train.csv
 
+01_Python/03_E_TEST/03_matplotlib/tips/
+
+01_Python/03_E_TEST/04_seaborn/house/
+01_Python/03_E_TEST/04_seaborn/tips/
+
+01_Python/03_E_TEST/05_Preprocessing/titanic/
+
+01_Python/03_E_TEST/06_machine_Learning/titanic/
+01_Python/03_E_TEST/06_machine_Learning/titanic_forsubmisson.csv
+
+01_Python/04_self_python/web_scraping_config.py
 01_Python/04_self_python/01_selenium/venv/bin/
 01_Python/04_self_python/01_selenium/venv/include/
 01_Python/04_self_python/01_selenium/venv/lib/
+01_Python/04_self_python/web_scraping_config.py
 
 01_Python/04_self_python/02_http/venv/bin
 01_Python/04_self_python/02_http/venv/include
