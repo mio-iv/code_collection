@@ -1,0 +1,100 @@
+基本統計量
+------------------------------
+合計		sum(x)
+算術平均		mean(x)
+中央値		median(x)
+最大値		max(x)
+最小値		min(x)
+四分位数		quantile(x)
+不偏分散		var(x)	※分散はデータと平均との差を2乗
+不偏標準偏差	sd(x)	※分散の平方根(データのばらつきの指標）
+基本統計量一括	summary(x)
+------------------------------
+
+h <- hist(height)
+boxplot(height)
+
+
+table() それぞれの値の度数
+sct[sct == max(sct)]	これで最頻値の階級と度数がわかる。
+
+apply()
+表形式のデータの各種統計量を一括して見る機能。
+各行：apply(データ, 1, 統計関数名)
+各列：apply(データ, 2, 統計関数名)
+
+
+【可視化】
+barplot(uriage)	棒グラフ
+pie(uriage)	円グラフ
+hist()		ヒストグラム
+Boxplot		箱ひげ図
+
+カテゴリカルデータ
+要約統計量：
+tapply(目的変数, 層別変数, 統計関数)
+男女別に平均を求める場合は 目的変数に金額(money)，層別変数は性別(sex)，用いる統計関数は平均(mean)
+
+Boxplot
+男女別の箱ひげ図:
+boxplot(money~sex)
+
+
+plot(x,y)	散布図を書く（省略した場合は自動で１〜入る）
+x座標には順に1,,2,...7が割り当てられています.
+
+
+lot(x, y, type, xlab, ylab, main)
+type プロットの種類を指定
+xlab, ylab x軸,y軸のラベルを指定 
+main グラフタイトルを指定
+
+よく使うプロットのタイプ引数→
+type="p" 座標に点をプロット(デフォルト) 
+type="l" 座標間を線で結ぶ
+type="b" 座標間を線で結び，点もプロット 
+type="h" x軸からy座標の値まで伸びる垂線を引く
+
+plotは、
+par(new=T)
+を間に挟むことで重ねることができる。
+
+
+plot(month, A, type="b", ann=F, col="red", pch=0, ylim=c(0,250))
+par(new=T)
+plot(month, B, type="b", ann=F, col="blue", pch=1, ylim=c(0,250))
+
+col：プロットする色
+pch：点の形状
+nn=F：軸名称を描画しない
+
+sin(x)、tan(x)、log(x) などの数学関数のグラフを描くときには関数 curve() が使えます.
+curve(sin(x), from = 0, to = 2 * pi, type = "l")
+
+x : 数学関数式
+fromとto：xの範囲
+
+
+dbinom()：二項分布の確率を求める
+ある事象Eの起こる確率をpとするとき，n回の試行のうち事象Eがx回起こる確率P(x)は
+dbinom(x, n, p)
+X:起こる回数、n：試行回数、p：ある事象が一回の試行で起こる確率
+
+二項分布の下側累積確率密度を求める関数 pbinom()
+
+正規分布の確率密度関数を作成する関数は dnorm() 
+
+累積確率を求める関数 pnorm() 
+
+関数legend() で凡例を示
+
+
+normal <- c(40,50,70)
+cheese <- c(30,70,60)
+fish <- c(40,30,50)
+double <- c(70,80,90)
+store <- c("A","B","C")
+item <- c("ノーマル", "チーズ", "フィッシュ", "ダブル")
+uriage <- rbind(normal, cheese, fish, double)
+colnames(uriage) <- store
+rownames(uriage) <- item

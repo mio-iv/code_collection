@@ -1,0 +1,162 @@
+//コマンドラインツールダウンロード
+xcode-select --install
+
+//mecab本体ダウンロード
+curl -fsSL "https://drive.google.com/uc?export=download&id=0B4y35FiV1wh7cENtOXlicTFaRUE" -o 
+mecab-0.996.tar.gz
+
+tar zxf mecab-0.996.tar.gz
+cd mecab-0.996
+./configure --with-charset=utf8
+make
+sudo make install
+
+
+//IPA辞書のダウンロードとインストール
+curl -fsSL "https://drive.google.com/uc?$export=download&id=0B4y35FiV1wh7MWVlSDBCSXZMTXM" -o mecab-ipadic-2.7.0-20070801.tar.gz
+tar zxf mecab-ipadic-2.7.0-20070801.tar.gz
+cd mecab-ipadic-2.7.0-20070801
+./configure --with-charset=utf8
+make
+sudo make install
+
+
+
+第3章
+setwd("/Users/natsumi/work/univ_R/14回")
+
+install.packages("RMeCab", repos = "http://rmecab.jp/R")
+------------------------------------------------------------------------------------
+結果：
+The downloaded binary packages are in
+	/var/folders/sk/g9xpst_s4k5fmx3c0gq8ml480000gn/T//RtmplCMZSX/downloaded_packages
+------------------------------------------------------------------------------------
+
+
+使い方！＝＝＝＝＝＝＝＝＝
+library(RMeCab)		パッケージの読み込み
+
+関数RMeCabC()は，引数として日本語テキストを与えられると、これを形態素解析器MeCabで解析した結果を返します
+res <- RMeCabC("すもももももももものうち")
+関数unlist()を使うと，解析結果をリスト形式からベクトル形式に変換
+unlist(res)
+比較演算子を利用した要素の取り出し
+> res2 <- unlist(res)
+> res2[names(res2)=="名詞"]
+関数names()を使って，res2の要素名称を取り出し，それが名詞であるかどうかを比較演算子 "==" を使って判定
+
+
+setwd("/Users/natsumi/work/univ_R/14回/syoshin")
+
+
+関数RMeCabFreq():
+指定されたファイルを形態素解析し，活用形は原型に変換した上で， その頻度を数え，結果をデータフレームとして返します
+
+Term：形態素の原形
+Info1：品詞名(大分類)
+Info2：品詞の小分類
+Freq：形態素の頻度
+
+頻度の大きい順に上位100件を表示
+head(abe2[order(-abe2$Freq),], 100)
+
+
+
+名詞と動詞に絞るーーーーー
+abe2_2 <- abe2[(abe2$Info1 == "名詞" | abe2$Info1 == "動詞" ),]
+head(abe2_2[order(-abe2_2$Freq),], 50)
+
+
+
+noda <- RMeCabFreq("2011noda.txt")
+noda <- noda[ ( noda$Info1 == "名詞" | noda$Info1 == "動詞" ), ] 
+head(noda[order(-noda$Freq),], 100)
+
+
+
+
+複数の文書をまとめてひとつの集合としたものを文書集合(もしくは，テキスト集合)といいます
+
+文書集合から、ターム・文書行列(term-document matrix)を作成可能。
+※
+列（カラム）：文書名
+行（row）：各ターム（形態素の原型）
+
+関数docMatrix()：
+第1引数で指定されたフォルダ内のすべてのファイルを読み込んで，ターム・文書行列を作成
+
+
+
+テキストマイニングでは，「重み」という概念を用いて， 重要度を考慮した分析を行うのが一般的です.
+「重み」とは，ある文書におけるタームの相対的重要度を示す概念.
+
+
+文書の解析では，タームを「内容語」と「機能語」に分けることがあります.
+内容語とは名詞，動詞，形容詞で，これらの語は文書の内容を直接表現するタームとされます.
+一方，機能語とは助詞などで，文書を文法的に成立させるために必要なタームです.
+
+
+
+{tf-idf値による重み付け}
+> res <- docMatrix("doc")
+
+関数 docMatrix() 
+特に何も指定しなければ名詞のみでターム・文書行列を作成。
+res <- docMatrix("doc", pos=c("名詞", "形容詞", "助詞"))	//名詞，形容詞，助詞 を抜き出して作成
+
+重み付けあり
+restfidf <- docMatrix("doc", pos=c("名詞", "形容詞", "助詞"), weight="tf*idf")
+
+> setwd("C:/Rwork")
+> res <- docMatrix("doc")
+
+
+
+「weight="tf*idf"」：
+局所的頻度である tf (Term Frequency: 単語の出現頻度)と 
+大域的頻度である idf(Inverse Document Frequency: 逆文書頻度)を
+掛けたものは tf-idf値
+
+
+
+
+wordcloudパッケージ
+ワードクラウドが手軽に作成できる「wordcloud」パッケージを紹介します.
+ワードクラウドは単語を出現頻度に応じた大きさで描画したもので，
+大量のテキスト中の頻出単語を直感的に理解できるため，様々な場面で利用されています.
+
+
+
+関数 wordcloud() の書式
+wordcloud(words, freq, scale = c(4, .5), min.freq = 3,
+random.order = TRUE, rot.per=.1 , random.color = FALSE, colors = "black",
+ordered.colors = FALSE)
+
+
+words: データフレームにおけるタームの列を指定します.
+freq: データフレームにおける 頻度の値の列を指定します.
+min.freq: プロットするタームのfreqの最低値です.
+scale: 文字の大きさ，間隔を配列で指定します。 c(文字の大きさ, 文字間隔) です.
+random.order: FALSEの場合，freqの値が高い順からプロットします.
+rot.per: 90度回転して表示させる単語の割合を指定します.
+random.color: FALSEの場合，freqの値が高い順に色を指定します.
+order.colors: TRUEの場合，タームの並び順に色を指定します.
+
+
+
+
+library(wordcloud)
+setwd("C:/Rwork/syoshin")
+abe <- RMeCabFreq("2013abe_2.txt")
+
+#名詞または動詞，形容詞を抜き出す.さらに名詞のうち，Info2=数となる名詞も除く
+> abe <- abe[ ( abe$Info1 == "名詞" | abe$Info1 == "動詞" | abe$Info1 =="形容詞") & (abe$Info2 != "数"), ]
+#一般的な動詞を除く
+> abe <- abe[(abe$Term != "ある" & abe$Term != "いる" & abe$Term != "いく" & abe$Term != "する" & abe$Term != "なる" & abe$Term != "こと" & abe$Term != "(" & abe$Term != ")" ), ]
+
+# 関数 wordclou()によってワードクラウドを求めます
+> wordcloud(abe$Term, abe$Freq, scale = c(3, .5), min.freq = 3, random.order = FALSE, random.color = TRUE, colors = brewer.pal(8, "Dark2"))
+
+
+
+restfidf2 <- docMatrix("doc", weight="tf*idf")

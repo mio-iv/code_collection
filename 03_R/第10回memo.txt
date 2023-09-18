@@ -1,0 +1,160 @@
+k-means法
+
+クラスターの平均(means)を用い、
+あらかじめ決められたk個のクラスターに分類する
+
+[関数 kmeans()の基本書式]
+kmeans(データフレームまたは行列, クラスター数, nstart=試行回数)
+kmeans(x, centers, iter.max, nstart, algorithm)
+	※algorithm : 4つの方法（"Hartigan-Wong", "Lloyd", "Forgy", "MacQueen"） 
+	から1つ選んで指定します．(デフォルトでは Hartigan-Wong)
+
+
+nstartの指定でいろいろな初期値を試す 初期クラスターの中心が異なれば、最終的な結果も異なる
+試行内で、クラスター内平方和が最小になる結果を返すため、
+nstartの指定数が大きいほど、分類精度が上がる
+
+
+（例1) クラスター数 k=3, nstart=1の場合
+花びら(Petal)の長さと幅のみを抜き出す
+> KM <- kmeans(iris[, 3:4], 3, nstart = 1) 
+> KM
+
+（例2) クラスター数 k=3, nstart=20の場合
+> KM <- kmeans(iris[, 3:4], 3, nstart = 20) 
+> KM
+
+散布図でクラスターを確認する
+> plot(iris[,3:4],col=KM$cluster, pch=16)
+
+
+
+-----------------------------------------------------------------
+# 本来の正解分類情報で散布図を表示
+> data(iris)
+> plot(iris[,1:4], col=iris$Species)
+
+# irisデータに対して関数 kmeans()を実行(4つの変数をすべて)
+> set.seed(5) #set.seed関数で同じ実行結果を得るために生成される乱数を固定
+> kms.iris <- kmeans(iris[,1:4],3) #クラスター数3つ
+> kms.iris
+
+# クラスターに分類された結果をplot
+> plot(iris[,1:4],col=kms.iris$cluster)
+
+# クラスター分析の結果のクラスター番号とのクロス表を集計
+# table(kms.iris$cluster, iris[,5])
+
+誤分類率を求めてみると，
+1−(50+36+48)/150=0.107=10.7%
+-----------------------------------------------------------------
+
+プロットする点の形状を本来の分類，点の色をクラスター分析の結果で表現してみましょう．
+> plot(iris[,1:4], pch=c(15,16,17)[iris[,5]], col=kms.iris$cluster)
+
+
+
+
+
+
+> setwd("/Users/natsumi/work/univ_R/9回")
+> meat1 <- read.csv("9-3-1.csv", header=T, row.names=1)
+> smeat <- scale(meat1)
+
+# smeatでk-means法にてクラスタリングをする
+> set.seed(5)
+> k4 <- kmeans(smeat, 4)
+> k4
+
+# チェック
+> k4$cluster[k4$cluster==1]
+> k4$cluster[k4$cluster==2]
+> k4$cluster[k4$cluster==3]
+> k4$cluster[k4$cluster==4]
+
+# 各クラスターの特徴を分析
+> groupk4mean <- k4$centers
+> groupk4mean
+結果→
+1番目のクラスター： 全体的に低い
+2番目のクラスター： 豚肉のみ低く、他は高い
+3番目のクラスター： 全体的に高い
+4番目のクラスター： 豚肉のみ高く、他は低い
+
+
+
+
+
+
+
+setwd("/Users/natsumi/work/univ_R/10回")
+data1 <- read.csv("10-4-1.csv", header=T)  
+> set.seed(10)
+> clust1 <- kmeans(data1[,1:2], 3)
+> clust1
+
+# 散布図を表示
+> plot(data1[,1:2], col=clust1$cluster, pch=c(15,16,17)[data1[,3]])
+
+# 誤分類クロス集計表
+> table(clust1$cluster, data1[,3])
+
+(16+8+4+7+3)/1200 =0.03 =約3%
+
+
+関数 kmeans（）の返り値のオブジェクトは 
+オブジェクト名$ centers で各クラスターの中心を呼び出すことができます．
+
+> clust1$centers
+x1 y1
+1 8.363492 4.561658
+2 2.839693 3.134757
+3 4.593090 6.526813
+
+ オブジェクト名$clusters とすると，
+各データがどのクラスターに分類されたかを呼び出すことができます．
+
+
+
+第10回 課題
+sb <- read.csv("10-4-2.csv", header=T)	200件のデータ
+
+> sb
+    Length HeightLeft HeightRight InnerFrameLower InnerFrameUpper Diagonal
+
+# 2つの属性、下側の余白の高さ(InnerFrameLower)，
+上側の余白の高さ(InnerFrameUpper)でクラスター分類
+> sb.lu <- sb[ ,4:5]
+> set.seed(5)
+> (kms.sb <- kmeans(sb.lu, 2))
+
+# 本来の分類結果と正しい分類のクロス集計表を確認
+> table(kms.sb$cluster, sb$class)
+ 
+      1   2
+  1 100  12
+  2   0  88
+12/200 = 0.06 = 6%
+
+
+
+> d <- dist(sb.lu) 
+> hc.sb.wd <- hclust(d, method="ward.D")
+> hc2 <- cutree(hc.sb.wd,2) 
+> table(hc2, sb$class)
+
+
+6つの属性をすべて使ってkmeans法でクラスターを構成
+> set.seed(5)
+> (kms.sb6 <- kmeans(sb[ ,1:6],2))
+> table(kms.sb6$cluster, sb$class)
+
+      1   2
+  1   0 100
+  2 100   0
+
+0% 
+
+
+
+

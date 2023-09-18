@@ -1,0 +1,78 @@
+setwd("/Users/natsumi/work/univ_R/9回")
+
+meat1 <- read.csv("9-3-1.csv", header=T, row.names=1)
+
+このデータではすべて金額で，単位が円なのでこのまま 分析してもよいですが，
+今回はデータを標準化してみることにします
+
+標準化	関数 scale() 
+「各変数を平均0, 標準偏差1 に揃えるため、各変数についてその変数の平均値を引いて，標準偏差で割ること
+	→平均0，標準偏差1にデータを揃えることで，変数間での比較をわかりやすくする
+
+smeat <- scale(meat1)
+
+距離行列を求める
+meat_dist <- dist(smeat)
+
+距離行列を関数 hclust()に与えることで，クラスターを構成
+mclust_ward <- hclust(meat_dist, method="ward.D")
+	※method にはクラスターの作成方法を指定
+
+ウォード法は多くの場合で，うまくクラスタリングが行えることが多いことが知られています.
+
+single		最近隣法
+complete	最遠隣法
+average		群平均法
+centroid	重心法
+ward.D		ウォード法
+
+
+樹形図(デンドログラム)を表示する(引数で hang= -1 を指定すると，樹形図のラベルを最下部で揃えます
+plot(mclust_ward, hang=-1)
+(鎖状効果が起きている場合、hclust()であまり良い分類方法を選択したと言えない）
+
+
+階層的クラスタ―分析の結果から，類似した都市の大きなグループを求める
+
+cutree()
+クラスターを任意の数で樹形図をカットした結果を求めることができる
+クラスタ ー数は引数k で指定
+
+c4 <- cutree(mclust_ward, k=4)
+
+結果確認
+c4[c4==1]
+c4[c4==2]
+c4[c4==3]
+c4[c4==4]
+
+
+クラスターの特徴を調べるために，クラスター別に平均を出す
+groupmean <- by(smeat[,1:5], list(c4) , colMeans)
+groupmean
+
+
+
+c6 <- cutree(mclust_ward, k=6)
+
+
+
+
+
+metadata <- read.csv("9-4-1.csv", header=T, row.names=1)
+data <- scale(metadata)
+dist <- dist(data)
+hclust_ward <- hclust(dist, method="ward.D")
+plot(hclust_ward, hang=-1)
+c6 <- cutree(hclust_ward, k=6)
+
+Group <- by(data[,1:5], list(c6) , colMeans)
+
+c6[c6==1]
+c6[c6==2]
+c6[c6==3]
+c6[c6==4]
+c6[c6==5]
+c6[c6==6]
+
+

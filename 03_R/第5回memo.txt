@@ -1,0 +1,55 @@
+[2]相関
+
+Rで共分散を求める関数は cov() 
+標準偏差を求める関数 sd() 
+Rで相関係数を求める関数は cor()
+
+相関係数 = 共分散 / 各データの標準偏差の積
+
+※相関係数は，共分散の値をデータの標準偏差で割って標準化した値
+共分散は偏差積を足し合わせてデータ数で割ったもの
+
+[3]散布図を描く
+
+散布図の作成は関数 plot()で
+関数 runif() … 0から1の間の数値を，指定された引数の個数だけランダムに発生させる関数
+例：runif(40)
+
+#データフレームを作成
+DF <- data.frame(PREF, TEMP, VALUE)
+
+関数 text() は散布図のラベルなどを加える関数
+
+[4]Rで単回帰分析
+
+回帰分析を行う関数として関数 lm() 	※重回帰分析でも使う
+単回帰式:y=ax+b を求める (aは傾き、bは切片)
+
+書き方：
+lm(formula, data)
+formula:モデルの形式(y=ax+bで予測する場合: y~x)
+data:分析を行うデータフレーム
+
+carsにて
+速度speedを説明変数，距離distを目的変数とする。
+回帰式の係数を求めたい。
+
+係数を表示するための関数 coefficients() 
+
+> cars.lm <- lm(dist~speed, data=cars)
+> coefficients(cars.lm)
+
+単回帰分析を行った結果との残差を表示するときは関数 residuals()
+> residuals(cars.lm)
+
+関数 abline() によって，単回帰分析の回帰直線を引く(プロットされたデータ上へ）
+※関数 lm() で回帰分析を行った結果が入ったオブジェクトを指定
+
+> plot(cars, xlab = "Speed (mph)", ylab = "Stopping distance (ft)", main="cars data", pch=16)
+> abline(cars.lm, lwd=2)
+
+
+テスト用
+DF <- data.frame(height, weight)
+lm_temp = lm(weight~height, data=DF)
+coefficients(lm_temp)

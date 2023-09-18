@@ -1,0 +1,71 @@
+1.
+library(arules)
+-----------------------------------------------------------------------
+
+2.
+samplelist <- list( c("a", "b", "c"), c("a", "d"), c("b", "d", "e"), c("a", "b","e"), c("a","b","c"), c("d","e"))
+-----------------------------------------------------------------------
+3.
+#トランザクション形式へ変換	as()を使う
+samplelist.trans <- as(samplelist, "transactions") 
+samplelist.trans
+
+-----------------------------------------------------------------------
+4.
+itemFrequencyPlot() ：arulesパッケージ内、トランザクションデータのアイテムの頻度の棒グラフを作成する関数
+引数type="absolute"で絶対度数、type="relativeで"相対度数（デフォルト）
+
+itemFrequencyPlot(samplelist.trans ,type = "absolute")
+
+-----------------------------------------------------------------------
+5.
+apriori() ：arulesパッケージ内、相関ルールを求める関数	apriori(data, parameter, appearance, control)
+samplelist.ap <- apriori(samplelist.trans)
+
+-----------------------------------------------------------------------
+6.
+inspect() ：生成された相関ルールを表示する（引数1：ルール）
+左から、条件部(lhs)，結論部(rhs)，支持度(support)，確信度(confidence)，リフト(lift)
+
+支持度：ルールの一般性の尺度と考えることができる
+確信度：条件部{X}が起こったときの結論部{Y}が起こる確率
+リフト：1より大きい場合，{Y}単独での登場よりも{X}と共に登場することが多いことがいえる
+
+-----------------------------------------------------------------------
+
+デフォルトの最小支持度 0.1, 最小確信度 0.75から変更した版
+samplelist.ap2 <- apriori(samplelist, parameter=list(support=0.25, confidence=0.5))
+inspect(samplelist.ap2)
+
+-----------------------------------------------------------------------
+
+
+[問題2]-----------------------------------------------------------------------------------
+Testlist <- list( c("A", "C", "D"), c("B", "C", "E"), c("A", "B", "C" ,"E"), c("B","E"))
+Testlist.trans <- as(Testlist, "transactions") 
+Testlist.ap <- apriori(Testlist.trans, parameter=list(support=0.1, confidence=0.5))
+inspect(Testlist.ap)
+------------------------------------------------------------------------------------------
+
+
+data(Groceries)
+summary(Groceries)
+itemFrequencyPlot(Groceries)
+
+topN引数:一部のアイテムに限って表示
+itemFrequencyPlot(Groceries[ ,1:30], col="lightblue", horiz=T)
+	※horiz=T と指定することで，横棒の形式で表示
+
+
+
+itemFrequencyPlot(Groceries, col="lightblue", horiz=T, topN=15)
+
+
+Groceries.ap <- apriori(Groceries, parameter=list(support=0.001, confidence=0.5, maxlen=4))
+inspect(head(sort(Groceries.ap, by="support"), 10))
+
+
+
+
+
+
