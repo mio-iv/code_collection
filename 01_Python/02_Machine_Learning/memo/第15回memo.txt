@@ -1,0 +1,16 @@
+演繹
+
+from kanren import * # 論理プログラミング用のライブラリを読込
+
+x=var()
+
+# xは5に等しい、というゴールのもとで、xは何?
+print(run(0, x, eq(x, 5)))
+# 0:全て返せ、X:変数
+
+
+lall関数：AND
+lany関数：OR
+
+conde関数：OR条件（リストで）
+return conde([父である(x, y)], [母である(x, y)])
