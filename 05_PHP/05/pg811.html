@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>図書館利用アンケートフォーム</title>
+</head>
+<body>
+<h1>図書館利用アンケートにご回答ください。</h1>
+<p>すべての質問に回答した後、「確認する」ボタンをクリックしてください。</p>
+<form method="POST" action="pg821.php">
+    <table border="1">
+        <tr>
+            <td>学籍番号</td>
+            <td><input type="text" name="number"></td>
+        </tr>
+        <tr>
+            <td>所属学部</td>
+            <td>
+                <select name="faculty">
+                    <option value="">選択</option>
+                    <option value="教育学部">教育学部</option>
+                    <option value="文学部">文学部</option>
+                    <option value="経済学部">経済学部</option>
+                    <option value="工学部">工学部</option>
+                    <option value="理学部">理学部</option>
+                    <option value="農学部">農学部</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>収蔵冊子数の充実度</td>
+            <td>
+                <input type="radio" name="rank" value="満足">満足
+                <input type="radio" name="rank" value="やや満足">やや満足
+                <input type="radio" name="rank" value="普通">普通
+                <input type="radio" name="rank" value="やや不満">やや不満
+                <input type="radio" name="rank" value="不満">不満
+            </td>
+        </tr>
+        <tr>
+            <td>利用目的(複数選択可)</td>
+            <td>
+                <input type="checkbox" name="use[]" value="個人学習">個人学習
+                <input type="checkbox" name="use[]" value="書籍を借りる">書籍を借りる
+                <input type="checkbox" name="use[]" value="資料等の複写">資料等の複写
+                <input type="checkbox" name="use[]" value="グループ学習">グループ学習
+                <input type="checkbox" name="use[]" value="その他">その他
+            </td>
+        </tr>
+        <tr>
+            <td>図書館に対する要望等</td>
+            <td>
+                <textarea rows="5" cols="40" name="comment"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>図書館ツアー</td>
+            <td>
+                <input type="checkbox" name="tour" checked>図書館ツアーを希望する
+                 （希望しない場合はチェックを外してください）
+            </td>
+        </tr>
+    </table>
+    <p><input type="submit" value="確認する"></p>
+</form>
+</body>
+</html>

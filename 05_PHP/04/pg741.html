@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>ユーザフォーム</title>
+</head>
+<body>
+<p>ユーザ名とパスワードを入力してください。</p>
+<p> 登録時のユーザ名とパスワードに関する規約は以下のとおりです。<br>
+すべて半角文字のみ有効です。<br>
+ユーザ名は4文字以上で8文字以内にしてください。<br>
+ユーザ名は英数字のみ有効です。<br>
+パスワードは6文字以上で10文字以内にしてください。<br>
+パスワードは英数字、記号、空白のみ有効です。<br>
+なお、パスワードはハッシュ化して登録されますので忘れないでください。</p>
+<form method="post" action="pg742.php">
+    ユーザ名:<br>
+    <input type="text" name="user"><br>
+    パスワード:<br>
+    <input type="text" name="passwd"><br>
+    <br>
+    <input type="submit" name="regist" value="登録する">
+    <!-- 登録用 -->
+    <input type="submit" name="login" value="ログイン">
+    <!-- ログイン用 -->
+    <input type="reset" value="クリア">
+    <!-- 「登録する」ボタンを押せば「regist」が、
+    「ログイン」ボタンを押せば「login」が、
+    プログラム「pg742.php」に渡される -->
+</form>
+</body>
+</html>

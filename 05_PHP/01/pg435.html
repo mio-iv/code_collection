@@ -1,0 +1,16 @@
+<!-- アップロードするファイルを指定するプログラム -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ファイルのアップロード</title>
+</head>
+<body>
+    <form action="pg436.php" method="post" enctype="multipart/form-data">
+        <!-- ファイルを送信するフォームでは、enctype属性に「multipart/form-data」を指定しておく 必要があります -->
+        ファイル<br>
+        <input type="file" name="uploadfile" size="50"><br><br>
+        <input type="submit" value="アップロード">
+    </form>
+</body>
+</html>

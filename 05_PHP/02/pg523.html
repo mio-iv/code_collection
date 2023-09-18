@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>三角関数と対数</title>
+<meta charset="utf-8">
+</head>
+<body>
+<h2>三角関数と対数</h2>
+<p>
+第1引数を入力し、演算ボタンを押してください。<br>
+三角関数の角度の単位は、度数で入力してください。<br>
+対数関数は、正の値のみ計算されます。
+</p>
+<form action="pg523.php" method="post">
+    <p>
+        第1引数
+        <input type="text" name="num1">
+    </p>
+    <p>
+        <input type="submit" name="op" value="sin">
+        <input type="submit" name="op" value="cos">
+        <input type="submit" name="op" value="tan">
+    </p>
+    <p>
+        <input type="submit" name="op" value="log">
+        <input type="submit" name="op" value="log10">
+    </p>
+    <p>
+        <input type="reset" value="クリア">
+    </p>
+</form>
+</body>
+</html>
