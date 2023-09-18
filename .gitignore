@@ -17,12 +17,12 @@
 01_Python/04_self_python/01_selenium/venv/bin/
 01_Python/04_self_python/01_selenium/venv/include/
 01_Python/04_self_python/01_selenium/venv/lib/
-01_Python/04_self_python/web_scraping_config.py
+01_Python/04_self_python/01_selenium/venv/pyvenv.cfg
 
-01_Python/04_self_python/02_http/venv/bin
-01_Python/04_self_python/02_http/venv/include
+01_Python/04_self_python/02_http/venv/bin/
+01_Python/04_self_python/02_http/venv/include/
 01_Python/04_self_python/02_http/venv/lib/
+01_Python/04_self_python/02_http/venv/pyvenv.cfg
 
-01_Python/04_self_python/03_/data/
-01_Python/04_self_python/03_/.env
+01_Python/04_self_python/03_TEST/data/
 
