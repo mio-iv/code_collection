@@ -1,0 +1,3 @@
+インフラ自動化ツールの「Ansible」
+Ansibleの実行環境となる、Ansibleサーバーとターゲット →　EC2
+

@@ -1,0 +1,43 @@
+スマホアプリ
+
+GUIアプリを開発するためのライブラリー「Kivy」
+
+ネイティヴアプリコードへのコンパイルが必要
+アプリの配布に専用の仕組みが必要
+
+pip install docutils pygments pypiwin32 kivy.deps.sdl2 kivy.deps.glew
+pip install kivy.deps.gstreamer
+Pip install kivy
+
+
+[Kivy開発]
+シンプルアプリケーション（ラベル1つ）の作成と実行
+Kvファイルを使ってPythonコードからGUIパートを分離する
+複数GUIパーツの配置とレイアウトを変更する
+Kvファイルのプレビュー機能を利用する
+メインウィンドウの大きさを変更する
+Widgetに日本語を表示する
+ボタンのクリック（タッチ）イベント
+
+
+Kivyを使ったGUIアプリケーションの開発作業はPythonインタープリターを使用
+KivyではGUIパーツを「Widget」と呼ぶ
+Label /Button／CheckBox／Image／Slider／Progress Bar／Text Input／Toggle button／Switch／ Video
+など
+
+ウィジット(widgit)のレイアウトの設定に「BoxLayout」を使用
+「BoxLayout」「FloatLayout」、「RelativeLayout」、「GridLayout」、「PageLayout」、「ScatterLayout」、「StackLayout」
+BoxLayoutのデフォルトは「horizontal」（横並び）
+
+
+[Kvファイルのプレビュー機能]
+python -m kivy.tools.kviewer ./test.kv
+
+[ウィンドウサイズの変更]
+from kivy.config import Config
+Config.set('graphics', 'width', '200')
+Config.set('graphics', 'height', '500')
+
+
+
+
