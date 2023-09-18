@@ -1,0 +1,12 @@
+ラッパークラス：文字列を整数値に変換できる。
+クラスと、メゾッドごとにちょっとずつ違う。
+
+Short.parseshort(文字列)	整数値（Short）への変換、
+Integer.parseInt()		整数値（Int）への変換、
+Long.parseLong()		整数値（Long）への変換、
+Froat.parseFroat()		実数値（Froat）への変換、
+Double.parseDouble()	実数値（Double）への変換、
+
+
+
+※SQLでいえば、convertにあたると思う。

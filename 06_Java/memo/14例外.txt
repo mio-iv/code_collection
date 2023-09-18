@@ -1,0 +1,12 @@
+例外：プログラム実行時に発生する予期せぬエラー。
+例外処理：（exception handling）適切な処理。
+
+Throwableクラス▼
+Error：プログラム実行時それ以上実行不可能なエラー。メモリ不足など。
+Exception：処理を行えば実行継続が可能。▼
+	RuntimeException：コンパイル時にチェックされない。
+	それ以外：コンパイルでチェックされる。
+
+RuntimeException：ArrayIndexOutOfBoundsExceptionなど。
+それ以外：FileNotFoundExceptionなど。ファイルが見つからない。
+全ては、上位のクラスを継承している。

@@ -1,0 +1,10 @@
+クラス名とファイル名class name and file name
+
+1 sose file には public を付けたclass は一つまでしか宣言できない
+
+java.langパッケージに限り。
+特別インポートしなくても使うことが出来る。
+※Javaプログラミングに必要な基本的なクラスが格納されているため。
+Systemクラス(printlnメゾッドなどの利用)
+Mathクラス（数学関数）
+Stirngクラス（文字列の利用）

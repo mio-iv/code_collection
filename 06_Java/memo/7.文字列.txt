@@ -1,0 +1,55 @@
+Javaにおける文字列の取り扱い
+→string型を用いる。（SQLだとvarchar(?)に相当する。）
+
+変数の基本形（int,double,char型など）とは異なり。
+クラスとして取り扱いを受ける。
+
+
+宣言
+String str1 = "abcd";
+String str2 = "efgh";
+
+利用
+str2 = str1 + str2;
+System.out.plintln(str2);
+
+
+(string型は参照型という型に属す。)
+String str1 = Cyber;とした場合。
+Cyberという文字列の実態が、メモリのどこかに確保される。それを、＝でつなげることで、
+変数str画、メモリ上のCyberを指し示す。C言語でいうポインタとは若干違いがある。（直接値を持つわけではなく、実体を参照する形で定義される。）
+
+
+参照先を変えたばあい。元の文字列CyberをUniversityに置き換えたわけではない。
+String str = "Cyber";
+str = "University";
+System.out.plintln(str);
+
+どこからも参照されていない"Cyber"ははごみとして扱われる。（ガーベッジと呼ぶ。）
+
+ScannerクラスのメゾッドばnextかnextLineを使用する。
+next();	→空欄の直前まで
+nextLine(); →空欄があっても最後まで読み込み
+
+
+Stringクラスのequalsメゾッドを使用すると、参照先の格納内容が同値がか判定できる。
+×　if(str1 == str2 )	:これは2変数の参照先が同じであるということを表す。
+基本的には常に別の実態を参照するため、同じ文字列が入力されていても、常にfalseになる。
+参照先の文字列の内容が同じことを判定するには？
+→str1.equals(str2)
+
+(クラスには一般的に)
+
+
+str.length()
+文字数を参照。
+
+参照元の配列。
+String[] strArr = new String[3];
+ルックスルーみたい。
+
+【コマンドライン引数】
+public static void main(String[] args)~とやっている。この、String[] argsの部分。
+
+
+

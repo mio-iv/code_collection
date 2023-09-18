@@ -1,0 +1,66 @@
+java.ioパッケージに含まれている。[import java.io.*;]を記述しておく。
+
+FileReaderクラス：テキストファイルからデータを読み込むためのクラス。
+BufferedReaderクラス：テキスト「ファイルからデータを効率よく読み込むためのクラス
+
+①ファイル名をString型:filenameでもっておき、対象のファイルを開いて、ファイルからデータを読み込む準備をする必要がある。
+FileReader fr = new FileReader(filename);
+filenameを開いている状態。後ほどcloseする必要がある。FileReaderクラスのインスタンスfrを生成しているので、今後は変数frを通じてデータの読み込みをする。
+②FileRearderクラスのreadメゾｯドを利用すると、ファイル内のデータを一文字ずつ読み込める。
+a = fr.read();
+ただし、効率が悪い。そのため、併せてRufferedReaderクラスを利用する。
+③
+RufferedReader br = new RufferedReader(fr);
+RufferedReaderクラスのインスタンスbrを作成。RufferedReaderクラスのreadLineメゾッドは、一行ずつデータを読み込み。文字列で返すメゾッド。
+今後は変数brを通じてファイルのデータを読み込む。
+※readLineメゾッドは改行コードを含まない形で返す。※一行分のデータの最後には、必ず改行を示す改行コードが存在する。
+④ファイルは閉じる。RufferedReaderクラスのcloseメゾッドを使用する。※閉じないとその後読み込めなくなる危険がある。
+br.close();
+
+
+System.exit(1);
+プログラムの実行を強制的に終了させる文。
+※注意
+FileNotFoundExceptionクラス：IOEExceptionクラスを継承している。※IOEがスーパークラス、FileNot..がサブクラス。
+→スーパークラスIOEを先にcatch節を記述すると、サブクラスの例外処理までキャッチするので、コンパイルエラーになる。
+
+
+LineNum：キーワードを含む行番号を取得。（１で初期化）
+LineCount：キーワードを含む行数合計を取得。（０で初期化）
+
+
+とある文字列が含まれているかどうかは、Stirngクラスのメゾッドを各種使用する。
+→indexOfメゾッド※対象の文字列の先頭から何番目の位置に現れるかを整数値（int）で返す。
+含まれなければ、-1が返ってくる。これを利用。
+
+
+【文字列のファイル書き込み】
+PrintWriterクラス
+filenameのファイルをあらたに作成、書き込みの準備をする。▼
+FileWriter fw = new FileWriter(filename);
+※すでにファイルが存在した場合は？
+RufferedWriterクラスを使用して、改行を自動で書き込めるようにする「効率化。※一行ずつの書き込みになるので
+BufferedWriter bw = new BufferedWirter(fw);
+ファイル書き込みを効率よくするために、さらにPrintWriterクラスを利用する。printメゾッド、printlnメゾッドがある。
+PrintWriter pw = new PrintWriter(bw);
+PrintWriteクラスにはcloseメゾッドもあるので、そちらを利用してファイルを閉じること。
+
+printメゾッド：改行コードは書き込まない。
+printlnメゾッド：改行コードも同時に書き込む。
+printfメゾッド：引数に記述したデータを、データフォーマットに従って書き込む。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
